@@ -3,7 +3,7 @@ Final project for machine learning 635
 
 ## Team Members 
 Ryan Miner
-Myra
+Myra Mulongoti
 Obum
 
 ## Project Layout
