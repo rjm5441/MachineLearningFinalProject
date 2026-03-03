@@ -1,2 +1,2 @@
 # reports/
-Exported figures and tables for your final report/presentation.
+Exported figures and tables for final report/presentation.

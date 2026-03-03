@@ -10,7 +10,7 @@ We compare classical machine learning models and more advanced regression approa
 
 ## Repository Structure
 - code/: scripts, notebooks, implementations
-- resources/: papers, links, notes, slides (provided/created separately)
+- resources/: papers, links, notes, slides
 - data/: datasets, snapshots, processed tables, saved models
 - reports/: figures and tables exported for writeups/slides
 
