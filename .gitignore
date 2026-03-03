@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data (keep snapshots local)
+data/raw/*
+data/interim/*
+data/processed/*
+data/models/*
+
+# OS
+.DS_Store

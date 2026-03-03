@@ -1,2 +1,6 @@
 pandas
 numpy
+scikit-learn
+requests
+python-dateutil
+joblib
