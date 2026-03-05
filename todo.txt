@@ -1,4 +1,6 @@
-TO DO:
+MAR 5 2026 @ 4PM MEETING:
+
+TO DO :
 
 MYRA:
     - Data Cleaning / Data Balancing / Feature Engineering/ Feature Scaling/ Feature Selection 
