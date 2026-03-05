@@ -19,4 +19,4 @@ OBUM:
 NEXT MEETING:
 
 TUE MAR 17 @ 4 PM 
-To be done by meeting: Data Cleaning task
+To be done by meeting: Preprocessing task
