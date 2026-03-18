@@ -15,16 +15,16 @@ We compare classical machine learning models and more advanced regression approa
 - reports/: figures and tables exported for writeups/slides
 
 ## How to Run
-1) Create a frozen dataset snapshot:
+### 1) Create a frozen dataset snapshot:
    python -m code.data.fetch_311 --limit 200000
 
-2) Build interim cleaned dataset:
+### 2) Build interim cleaned dataset:
    python -m code.data.make_dataset
 
-3) Build final feature inputs + CV folds:
+### 3) Build final feature inputs + CV folds:
    python -m code.features.build_features
 
-4) Train/evaluate models:
+### 4) Train/evaluate models:
 
    All model training scripts:
    - load `Xraw_*`, `y_*`, `folds_*`, and `feature_spec_*` from `data/processed/`
@@ -36,9 +36,9 @@ We compare classical machine learning models and more advanced regression approa
 
 
    - Run commands:
-   python -m code.models.train_baseline
-   python -m code.models.train_linear
-   python -m code.models.train_tree
+      - python -m code.models.train_baseline
+      - python -m code.models.train_linear
+      - python -m code.models.train_tree
       etc...
-   python -m code.models.evaluate
+      - python -m code.models.evaluate
   
