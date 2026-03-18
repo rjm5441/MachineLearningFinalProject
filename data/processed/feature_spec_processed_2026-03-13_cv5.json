@@ -1,0 +1,35 @@
+{
+  "tag": "processed_2026-03-13_cv5",
+  "source_interim": "MachineLearningFinalProject/data/interim/311_cleaned_2026-03-13.parquet",
+  "created_at_utc": "2026-03-18T00:12:48Z",
+  "target_col": "resolution_time_hours",
+  "target_transform": "log1p",
+  "categorical_cols": [
+    "agency",
+    "complaint_type",
+    "descriptor",
+    "borough",
+    "location_type",
+    "incident_zip",
+    "community_board",
+    "council_district",
+    "police_precinct"
+  ],
+  "numeric_cols": [
+    "latitude",
+    "longitude"
+  ],
+  "time_feature_cols": [
+    "created_hour",
+    "created_dayofweek",
+    "created_month",
+    "created_is_weekend"
+  ],
+  "n_splits": 5,
+  "strat_bins": 10,
+  "random_seed": 42,
+  "categorical_imputer": "SimpleImputer(most_frequent)",
+  "categorical_encoder": "OneHotEncoder(handle_unknown='ignore')",
+  "numeric_imputer": "SimpleImputer(median)",
+  "numeric_scaler": "StandardScaler"
+}

@@ -11,7 +11,6 @@ venv/
 # Data (keep snapshots local)
 data/raw/*
 data/interim/*
-data/processed/*
 data/models/*
 
 # OS
