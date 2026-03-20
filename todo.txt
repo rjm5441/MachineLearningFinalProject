@@ -8,12 +8,13 @@ MYRA:
 
 
 RYAN:
-    - Boosting
+    - Gradient Boosting
     - Linear Regression - Mini batch, batch, stochaistic
 
 
 OBUM: 
     - Neural Networks
+    - MLP
 
 
 NEXT MEETING:
