@@ -4,17 +4,18 @@ TO DO :
 
 MYRA:
     - Data Cleaning / Data Balancing / Feature Engineering/ Feature Scaling/ Feature Selection (Done)
-    - Tree Based / Random Forest
+    - Random Forest Regression
 
 
 RYAN:
-    - Gradient Boosting
+    - Gradient Boosting XGBoost
     - Linear Regression - Mini batch, batch, stochaistic
 
 
 OBUM: 
     - Neural Networks
     - MLP
+
 
 
 NEXT MEETING:
