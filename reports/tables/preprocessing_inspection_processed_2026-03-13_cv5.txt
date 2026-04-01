@@ -1,0 +1,89 @@
+Preprocessing Inspection Report (NO-LEAKAGE) — processed_2026-03-13_cv5
+========================================================================
+Generated (UTC): 2026-04-01T15:38:23Z
+
+SOURCE FILES
+- Xraw:   data/processed/Xraw_processed_2026-03-13_cv5.parquet
+- y:      data/processed/y_processed_2026-03-13_cv5.npy
+- folds:  data/processed/folds_processed_2026-03-13_cv5.npz
+- spec:   data/processed/feature_spec_processed_2026-03-13_cv5.json
+
+RAW DATASET
+- Rows: 160945
+- Raw feature columns: 15
+- Categorical cols (9): agency, complaint_type, descriptor, borough, location_type, incident_zip, community_board, council_district, police_precinct
+- Numeric+time cols (6): latitude, longitude, created_hour, created_dayofweek, created_month, created_is_weekend
+
+TARGET (y)
+- shape: (160945,)
+- transform: log1p
+- min/mean/median/max: 0.0000 / 1.9993 / 1.4956 / 5.8119
+- std: 1.6159
+
+TRANSFORMED FEATURE SPACE (from Fold 0 train-fit)
+- X_train (fold0) shape: (128756, 1252)
+- X_test  (fold0) shape: (32189, 1252)
+- total transformed features: 1252
+- sample transformed feature names:
+  - cat__agency_DCWP
+  - cat__agency_DEP
+  - cat__agency_DHS
+  - cat__agency_DOB
+  - cat__agency_DOE
+  - cat__agency_DOHMH
+  - cat__agency_DOT
+  - cat__agency_DPR
+  - cat__agency_DSNY
+  - cat__agency_HPD
+  - cat__agency_NYPD
+  - cat__agency_OTI
+  - cat__agency_TLC
+  - cat__complaint_type_AHV Inspection Unit
+  - cat__complaint_type_APPLIANCE
+  - cat__complaint_type_Abandoned Bike
+  - cat__complaint_type_Abandoned Vehicle
+  - cat__complaint_type_Air Quality
+  - cat__complaint_type_Animal in a Park
+  - cat__complaint_type_Animal-Abuse
+  - cat__complaint_type_Asbestos
+  - cat__complaint_type_BEST/Site Safety
+  - cat__complaint_type_Beach/Pool/Sauna Complaint
+  - cat__complaint_type_Bench
+  - cat__complaint_type_Bike Rack
+  - cat__complaint_type_Bike/Roller/Skate
+  - cat__complaint_type_Blocked Driveway
+  - cat__complaint_type_Boilers
+  - cat__complaint_type_Bridge Condition
+  - cat__complaint_type_Broken Parking Meter
+  - cat__complaint_type_Building Drinking Water Tank
+  - cat__complaint_type_Building/Use
+  - cat__complaint_type_Bus Stop Shelter Complaint
+  - cat__complaint_type_Bus Stop Shelter Placement
+  - cat__complaint_type_Commercial Disposal Complaint
+  - cat__complaint_type_Consumer Complaint
+  - cat__complaint_type_Cranes and Derricks
+  - cat__complaint_type_Curb Condition
+  - cat__complaint_type_DOOR/WINDOW
+  - cat__complaint_type_Damaged Tree
+
+PER-FOLD SHAPES (preprocessor fit on train only)
+- Fold 0:
+    train rows: 128756, test rows: 32189
+    X_train shape: (128756, 1252)
+    X_test  shape: (32189, 1252)
+- Fold 1:
+    train rows: 128756, test rows: 32189
+    X_train shape: (128756, 1255)
+    X_test  shape: (32189, 1255)
+- Fold 2:
+    train rows: 128756, test rows: 32189
+    X_train shape: (128756, 1245)
+    X_test  shape: (32189, 1245)
+- Fold 3:
+    train rows: 128756, test rows: 32189
+    X_train shape: (128756, 1248)
+    X_test  shape: (32189, 1248)
+- Fold 4:
+    train rows: 128756, test rows: 32189
+    X_train shape: (128756, 1248)
+    X_test  shape: (32189, 1248)
