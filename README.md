@@ -6,7 +6,7 @@ We compare classical machine learning models and more advanced regression approa
 ## Developers
 - Ryan Miner
 - Myra Mulongoti
-- Obum
+- Obumneme Umeonwuka
 
 ## Repository Structure
 - code/: scripts, notebooks, implementations
