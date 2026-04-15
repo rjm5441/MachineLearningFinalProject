@@ -7,4 +7,5 @@ This folder holds raw snapshots, intermediate cleaned outputs, processed model-r
 - raw/: frozen snapshots pulled from NYC Open Data (CSV + metadata JSON)
 - interim/: cleaned tables before final feature engineering
 - processed/: final feature matrix/target ready for modeling
-- models/: trained models (joblib/pkl)
+
+Note, the raw and interim datasets were not uploaded to the Github becuase they were too large.
