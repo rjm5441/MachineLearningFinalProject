@@ -9,7 +9,7 @@ We compare classical machine learning models and more advanced regression approa
 - Obumneme Umeonwuka
 
 ## Repository Structure
-- code/: scripts, notebooks, implementations
+- code/: scripts, implementations
 - resources/: papers, links, notes, slides
 - data/: datasets, snapshots, processed tables, saved models
 - reports/: figures and tables exported for writeups/slides
@@ -39,6 +39,5 @@ We compare classical machine learning models and more advanced regression approa
       - python -m code.models.train_baseline
       - python -m code.models.train_linear
       - python -m code.models.train_tree
-      etc...
-      - python -m code.models.evaluate
+     
   
