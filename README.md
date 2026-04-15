@@ -2,7 +2,11 @@
 
 ## Abstract
 We compare classical machine learning models and more advanced regression approaches to predict the resolution time of NYC 311 complaints using the NYC Open Data 311 Service Requests dataset (2020–present). Models are evaluated on a common, frozen snapshot of the dataset using MAE and RMSE.
-The following models are compared: XGboost, Random Forest Regressor, Residual Neural Network, Multilayer Perceptron.
+The following models are compared: 
+   1) XGboost,
+   2) Random Forest Regressor, 
+   3) Residual Neural Network,
+   4) Multilayer Perceptron.
 
 ## Developers
 - Ryan Miner
