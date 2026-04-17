@@ -70,6 +70,106 @@ def _savefig(name: str) -> None:
     print(f"Saved: {out}")
 
 
+def _make_model_charts(
+    model_label: str,
+    prefix: str,
+    preds_path: Path,
+    results_path: Path,
+) -> None:
+    """
+    Generate the standard suite of charts for any trained model.
+
+    - model_label : display name used in plot titles, e.g. "MLP"
+    - prefix      : short string used in output filenames, e.g. "mlp"
+    - preds_path  : parquet with columns y_true / y_pred (all folds stacked)
+    - results_path: CSV with fold rows + summary rows (row_type column)
+    """
+    if not preds_path.exists():
+        print(f"Skipping {model_label} charts: {preds_path} not found.")
+        return
+    if not results_path.exists():
+        print(f"Skipping {model_label} charts: {results_path} not found.")
+        return
+
+    preds = pd.read_parquet(preds_path)
+    results = pd.read_csv(results_path)
+
+    # --- 1) Pred vs true scatter ---
+    lo = float(min(preds["y_true"].min(), preds["y_pred"].min()))
+    hi = float(max(preds["y_true"].max(), preds["y_pred"].max()))
+    plt.figure()
+    plt.scatter(preds["y_true"], preds["y_pred"], s=8, alpha=0.6, color=THEME["yellow"])
+    plt.plot([lo, hi], [lo, hi], color=THEME["coral"], linewidth=1.5, label="perfect")
+    plt.title(f"Best {model_label}: Predictions vs Actual (log1p scale)")
+    plt.xlabel("y_true (log1p(hours))")
+    plt.ylabel("y_pred (log1p(hours))")
+    plt.legend()
+    _savefig(f"{prefix}_pred_vs_true_scatter.png")
+
+    # --- 2) Residual histogram ---
+    resid = preds["y_pred"] - preds["y_true"]
+    plt.figure()
+    plt.hist(resid, bins=60, color=THEME["yellow"])
+    plt.axvline(0, color=THEME["coral"], linewidth=1.5, linestyle="--")
+    plt.title(f"Best {model_label}: Residuals (y_pred − y_true, log1p scale)")
+    plt.xlabel("Residual")
+    plt.ylabel("Count")
+    _savefig(f"{prefix}_residual_hist.png")
+
+    # --- 3) Absolute error vs target ---
+    abs_err = resid.abs()
+    plt.figure()
+    plt.scatter(preds["y_true"], abs_err, s=8, alpha=0.5, color=THEME["coral"])
+    plt.title(f"Best {model_label}: |Error| vs Target (log1p scale)")
+    plt.xlabel("y_true (log1p(hours))")
+    plt.ylabel("|y_pred − y_true|")
+    _savefig(f"{prefix}_abs_error_vs_target.png")
+
+    # --- 4) Fold-level RMSE and MAE for best config ---
+    if "row_type" not in results.columns:
+        print(f"  Warning: {results_path} missing 'row_type' column; skipping fold charts.")
+        return
+
+    summary = results[results["row_type"] == "summary"].copy()
+    is_best_mask = summary["is_best"].astype(str).str.lower().isin(["true", "1"])
+    if is_best_mask.any():
+        best_cfg = summary.loc[is_best_mask, "config_id"].iloc[0]
+    else:
+        best_cfg = summary.sort_values("rmse_mean", ascending=True)["config_id"].iloc[0]
+
+    fold_rows = results[(results["row_type"] == "fold") & (results["config_id"] == best_cfg)].copy()
+    fold_rows = fold_rows.sort_values("fold")
+
+    plt.figure()
+    plt.plot(fold_rows["fold"], fold_rows["rmse"], marker="o", color=THEME["yellow"])
+    plt.title(f"{model_label} Fold RMSE — Best Config: {best_cfg}")
+    plt.xlabel("Fold")
+    plt.ylabel("RMSE (log1p scale)")
+    plt.grid(True, alpha=0.3)
+    _savefig(f"{prefix}_fold_rmse.png")
+
+    plt.figure()
+    plt.plot(fold_rows["fold"], fold_rows["mae"], marker="o", color=THEME["coral"])
+    plt.title(f"{model_label} Fold MAE — Best Config: {best_cfg}")
+    plt.xlabel("Fold")
+    plt.ylabel("MAE (log1p scale)")
+    plt.grid(True, alpha=0.3)
+    _savefig(f"{prefix}_fold_mae.png")
+
+    # --- 5) Hyperparameter search: mean RMSE by config ---
+    summary_sorted = summary.sort_values("rmse_mean", ascending=True).copy()
+    labels = summary_sorted["config_id"].astype(str).tolist()
+    rmse_vals = summary_sorted["rmse_mean"].to_numpy()
+    colors = [THEME["coral"] if str(c) == str(best_cfg) else THEME["yellow"] for c in labels]
+
+    plt.figure(figsize=(10, 5))
+    plt.bar(range(len(labels)), rmse_vals, color=colors)
+    plt.title(f"{model_label} Hyperparameter Search: Mean RMSE by Config (lower is better)")
+    plt.ylabel("Mean RMSE (log1p scale)")
+    plt.xticks(range(len(labels)), labels, rotation=60, ha="right")
+    _savefig(f"{prefix}_mean_rmse_by_config.png")
+
+
 def main():
     _ensure_outdir()
 
@@ -225,6 +325,26 @@ def main():
         plt.ylabel("Mean y")
         plt.xticks(rotation=30, ha="right")
         _savefig("mean_target_by_borough_log1p.png")
+
+    # ------------------------------------------------------------------ #
+    # MLP charts
+    # ------------------------------------------------------------------ #
+    _make_model_charts(
+        model_label="MLP",
+        prefix="mlp",
+        preds_path=Path("reports/preds/preds_mlp_regressor_BEST_processed_2026-03-13_cv5.parquet"),
+        results_path=Path("reports/tables/mlp_results_processed_2026-03-13_cv5.csv"),
+    )
+
+    # ------------------------------------------------------------------ #
+    # ResNet (Neural Net) charts
+    # ------------------------------------------------------------------ #
+    _make_model_charts(
+        model_label="ResNet",
+        prefix="resnet",
+        preds_path=Path("reports/preds/preds_resnet_regressor_BEST_processed_2026-03-13_cv5.parquet"),
+        results_path=Path("reports/tables/resnet_results_processed_2026-03-13_cv5.csv"),
+    )
 
     print("\nDone. Figures written to reports/figures/.")
 
