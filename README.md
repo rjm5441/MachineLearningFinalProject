@@ -30,18 +30,18 @@ The following models are compared:
    `python -m code.features.build_features`
 
 ### 4) Train/evaluate models:
-   All model training scripts:
-      - load `Xraw_*`, `y_*`, `folds_*`, and `feature_spec_*` from `data/processed/`
-      - for each CV fold:
-         - fit the preprocessing pipeline only on the training split
-         - transform train/test split
-         - train the model and compute metrics 
-         - write per-fold + average results to `reports/tables/` (and/or print to console)
+All model training scripts:
+- load `Xraw_*`, `y_*`, `folds_*`, and `feature_spec_*` from `data/processed/`
+- for each CV fold:
+   - fit the preprocessing pipeline only on the training split
+   - transform train/test split
+   - train the model and compute metrics 
+   - write per-fold + average results to `reports/tables/` (and/or print to console)
 
-   - Commands to run training and make predictions:
-      - `python -m code.models.train_mlp`
-      - `python -m code.models.train_neural_net`
-      - `python -m code.models.train_tree`
-      - `python -m code.models.train_xgb`
+- Commands to run training and make predictions:
+   - `python -m code.models.train_mlp`
+   - `python -m code.models.train_neural_net`
+   - `python -m code.models.train_tree`
+   - `python -m code.models.train_xgb`
      
   
